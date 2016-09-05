@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="contactsApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.jqueryui.min.js"></script>
+	
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Angular lib -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.jqueryui.min.css">
+	
+	
+    <!-- Create some padding for body -->
+    <style>
+      body {
+        min-height: 2000px;
+        padding-top: 70px;
+      }
+    </style>
+
+   
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand" href="#/">Game of Thrones</div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/index.html">Home</a></li>
+			<li class="active"><a href="/list.html">Battle List</a></li>
+			<li><a href="/count.html">Battle Count</a></li>
+			<li><a href="/statistics.html">Statistics</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Dynamically render templates -->
+    <div class="container" >
+	<table id="example" class="display" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Battle Number</th>
+                <th>Attacker King</th>
+                <th>Defender King</th>
+                <th>Attacker 1</th>
+				<th>Attacker 2</th>
+                <th>Attacker 3</th>
+                <th>Attacker 4</th>
+                <th>Defender1</th>
+                <th>Defender2</th>
+                <th>Defender3</th>
+				<th>Defender 4</th>
+                <th>Attacker Outcome</th>
+                <th>Battle Type</th>
+                <th>Major Death</th>
+                <th>Major Capture</th>
+                <th>Attacker Size</th>
+				
+				
+                <th>Defender Size</th>
+				<th>Attacker Commander</th>
+                <th>Deffender Commander</th>
+                <th>Summer</th>
+                <th>Location</th>
+                <th>Region</th>
+                <th>Note</th>
+						
+
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Battle Number</th>
+                <th>Attacker King</th>
+                <th>Defender King</th>
+                <th>Attacker 1</th>
+				
+				<th>Attacker 2</th>
+                <th>Attacker 3</th>
+                <th>Attacker 4</th>
+                <th>Defender1</th>
+                <th>Defender2</th>
+                <th>Defender3</th>
+				<th>Defender 4</th>
+                <th>Attacker Outcome</th>
+                <th>Battle Type</th>
+                <th>Major Death</th>
+                <th>Major Capture</th>
+                <th>Attacker Size</th>
+				
+				
+                <th>Defender Size</th>
+				<th>Attacker Commander</th>
+                <th>Deffender Commander</th>
+                <th>Summer</th>
+                <th>Location</th>
+                <th>Region</th>
+                <th>Note</th>
+            </tr>
+        </tfoot>
+        <tbody id="t_body">
+        </tbody>
+    </table>
+	
+    </div>
+	<script>
+	$(document).ready(function() {
+	loadBattlesList();
+    
+} );
+
+function loadBattlesList(){
+var url = "http://127.0.0.1:8081/got/list";
+
+$.ajax( {
+			url: url, 
+			success: function(result){
+				console.log(result);
+				var html = "";
+				for (i = 0; i < result.length; i++) { 
+		        html = html+"<tr>";
+                
+                html = html+"<td>"+result[i].name+ "</td>";
+				html = html+"<td>"+result[i].year+ "</td>";
+				html = html+"<td>"+result[i].battle_number+ "</td>";
+				html = html+"<td>"+result[i].attacker_king+ "</td>";
+				html = html+"<td>"+result[i].defender_king+ "</td>";
+				html = html+"<td>"+result[i].attacker_1+ "</td>";
+				html = html+"<td>"+result[i].attacker_2+ "</td>";
+				html = html+"<td>"+result[i].attacker_3+ "</td>";
+				
+				html = html+"<td>"+result[i].attacker_4+ "</td>";
+				html = html+"<td>"+result[i].defender_1+ "</td>";
+				html = html+"<td>"+result[i].defender_2+ "</td>";
+				html = html+"<td>"+result[i].defender_3+ "</td>";
+				html = html+"<td>"+result[i].defender_4+ "</td>";
+				html = html+"<td>"+result[i].attacker_outcome+ "</td>";
+				html = html+"<td>"+result[i].battle_type+ "</td>";
+				html = html+"<td>"+result[i].major_death+ "</td>";
+				html = html+"<td>"+result[i].major_capture+ "</td>";
+				html = html+"<td>"+result[i].attacker_size+ "</td>";
+				html = html+"<td>"+result[i].defender_size+ "</td>";
+				
+				html = html+"<td>"+result[i].attacker_commander+ "</td>";
+				html = html+"<td>"+result[i].defender_commander+ "</td>";
+				html = html+"<td>"+result[i].summer+ "</td>";
+				html = html+"<td>"+result[i].location+ "</td>";
+				html = html+"<td>"+result[i].region+ "</td>";
+				html = html+"<td>"+result[i].note+ "</td>";
+				
+				html = html+"</tr>"
+				}
+				$('#t_body').append(html);
+				$('#example').DataTable();
+			}
+			
+		});
+}
+</script>
+	
+	
+  </body>
+</html>

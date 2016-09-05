@@ -1,0 +1,12 @@
+{
+  "name": "got",
+  "description": "Game of Thrones Application",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "logger": "0.0.1",
+    "path": "^0.12.7"
+  }
+}
